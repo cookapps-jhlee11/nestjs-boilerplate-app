@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  db-manager:
+    container_name: pgadmin_app
+    image: dpage/pgadmin4
+    env_file: .env
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - app-network
+    depends_on:
+      - database
+  database:
+    container_name: postgres_app
+    image: postgres:12
+    env_file: .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: pg_isready
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+
+volumes:
+  postgres-data:
+  pgadmin-data:
