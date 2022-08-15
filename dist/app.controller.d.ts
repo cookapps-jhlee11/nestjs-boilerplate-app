@@ -5,5 +5,4 @@ export declare class AppController {
     private userService;
     constructor(appService: AppService, userService: UsersService);
     getHello(): string;
-    register(req: any, res: any, body: any): Promise<void>;
 }

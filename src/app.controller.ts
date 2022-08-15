@@ -11,10 +11,5 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('register')
-  async register(@Req() req, @Res() res, @Body() body){
-    const reg = await this.userService.register(body);
-    res.status(reg.status).json(reg.content);
-  }
 }
 
