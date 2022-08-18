@@ -22,7 +22,8 @@ async function bootstrap() {
 
   if(process.argv[2] === 'swaggerBuild'){
     const fs = require('fs')
-    fs.writeFileSync("./swagger-docs/swagger-spec.json",JSON.stringify(document));
+    fs.writeFileSync("./swagger_docs/swagger-spec.json",JSON.stringify(document));
+    console.log('Swagger document has successfully saved');
     app.close();
     return;
   }

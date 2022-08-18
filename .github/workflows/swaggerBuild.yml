@@ -34,6 +34,19 @@ jobs:
           node-version: 16.14.0
           cache: npm
 
+      - name: Cache action
+        uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - if: steps.npm-cache.outputs.cache-hit == 'true'
+        run: echo 'NPM cache hit!'
+      - if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: |
+          echo 'NPM cache missed!'
+          npm ci
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@13d241b293754004c80624b5567555c4a39ffbe3
         with:
@@ -43,6 +56,5 @@ jobs:
       
       - name: Swagger Docs Build
         run: |
-          npm ci
           npm run build:swagger
           aws s3 cp ./swagger-docs/swagger-spec.json s3://tech-swagger-test/swagger/swagger-spec.json
