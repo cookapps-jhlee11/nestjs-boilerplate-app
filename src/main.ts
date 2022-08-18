@@ -19,7 +19,7 @@ async function bootstrap() {
     .addTag('Users')
     .addServer('http://localhost:3000',"로컬 호스트 서버")
     .addServer('http://1.2.3.4:3000',"Dev 서버")
-    .addServer('https://tech.blablabla.blabla/apis',"Dev 서버")
+    .addServer('https://tech.blablabla.blabla/apis',"prod 서버")
     .build();
   const document = SwaggerModule.createDocument(app, config);
 
