@@ -10,6 +10,7 @@ async function bootstrap() {
   //console.log(process.argv[1]) // dist/src/main
   //console.log(process.argv[2]+" "+typeof(process.argv[2])) // argument[0]
   
+  
   //Swagger Initialize
   const config = new DocumentBuilder()
     .setTitle('Nestjs Boilerplate App')
