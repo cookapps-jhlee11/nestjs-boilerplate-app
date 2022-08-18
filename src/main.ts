@@ -16,7 +16,7 @@ async function bootstrap() {
     .setDescription('The N.B.As API Description')
     .setVersion('1.0')
     .addTag('Users')
-    .addServer('http://localhost:3001')
+    .addServer('http://localhost:3000')
     .build();
   const document = SwaggerModule.createDocument(app, config);
 
