@@ -1,9 +1,14 @@
 import { Controller, Post, Req, Res, Body, Get, Param } from '@nestjs/common';
-import { ApiOperation, ApiTags, ApiBearerAuth, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiOperation, ApiTags, ApiBearerAuth, ApiResponse, ApiBody, ApiProperty } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UsersDTO } from './dto/create-user.dto'
 import { User } from './entities/user.entity'
 
+
+class Email{
+    @ApiProperty({example:"jhlee11@cookapps.com"})
+    email:string
+}
 
 @ApiBearerAuth()
 @ApiTags('Users')
@@ -21,8 +26,9 @@ export class UsersController {
     @Post('findUser')
     @ApiOperation({summary: "회원찾기"})
     @ApiResponse({status:403, description: 'forbidden'})
-    //@ApiResponse({status:200, })
-    async findUser(@Req() req, @Res() res, @Body() body: UsersDTO ){
+    async findUser(@Req() req, @Res() res, @Body() body:Email){
+        console.log(body)
+        
         const result = await this.usersService.findOne(body.email);
         res.status(result.status).json(result.content);
     }

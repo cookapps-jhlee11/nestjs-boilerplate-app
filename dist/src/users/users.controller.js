@@ -18,6 +18,12 @@ const swagger_1 = require("@nestjs/swagger");
 const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const user_entity_1 = require("./entities/user.entity");
+class Email {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: "jhlee11@cookapps.com" }),
+    __metadata("design:type", String)
+], Email.prototype, "email", void 0);
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -26,6 +32,7 @@ let UsersController = class UsersController {
         return this.usersService.findAll();
     }
     async findUser(req, res, body) {
+        console.log(body);
         const result = await this.usersService.findOne(body.email);
         res.status(result.status).json(result.content);
     }
@@ -50,7 +57,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, create_user_dto_1.UsersDTO]),
+    __metadata("design:paramtypes", [Object, Object, Email]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findUser", null);
 __decorate([
