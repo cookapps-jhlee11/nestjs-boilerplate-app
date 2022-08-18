@@ -11,12 +11,13 @@ async function bootstrap() {
         .setDescription('The N.B.As API Description')
         .setVersion('1.0')
         .addTag('Users')
-        .addServer('http://localhost:3001')
+        .addServer('http://localhost:3000')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     if (process.argv[2] === 'swaggerBuild') {
         const fs = require('fs');
-        fs.writeFileSync("./swagger-spec.json", JSON.stringify(document));
+        fs.writeFileSync("./swagger_docs/swagger-spec.json", JSON.stringify(document));
+        console.log('Swagger document has successfully saved');
         app.close();
         return;
     }

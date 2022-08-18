@@ -25,6 +25,10 @@ let UsersController = class UsersController {
     async findAll() {
         return this.usersService.findAll();
     }
+    async findUser(req, res, body) {
+        const result = await this.usersService.findOne(body.email);
+        res.status(result.status).json(result.content);
+    }
     async register(req, res, body) {
         const reg = await this.usersService.register(body);
         res.status(reg.status).json(reg.content);
@@ -38,6 +42,17 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Post)('findUser'),
+    (0, swagger_1.ApiOperation)({ summary: "회원찾기" }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'forbidden' }),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, create_user_dto_1.UsersDTO]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "findUser", null);
 __decorate([
     (0, common_1.Post)('register'),
     (0, swagger_1.ApiOperation)({ summary: "회원가입" }),

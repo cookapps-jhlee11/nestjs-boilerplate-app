@@ -34,10 +34,19 @@ let UsersService = class UsersService {
     async findAll() {
         return this.usersRepository.find();
     }
-    findOne(email) {
-        return this.usersRepository.findOne({
-            email: email,
+    async findOne(email) {
+        let isOK = true;
+        const res = await this.usersRepository.findOne({ email: email }).catch((error) => {
+            console.log(error);
+            isOK = false;
         });
+        console.log(res);
+        if (isOK) {
+            return { status: 201, content: { msg: res } };
+        }
+        else {
+            return { status: 400, content: { msg: 'User not found' } };
+        }
     }
     async remove(id) {
         await this.usersRepository.delete(id);

@@ -5,5 +5,6 @@ export declare class UsersController {
     private usersService;
     constructor(usersService: UsersService);
     findAll(): Promise<User[]>;
+    findUser(req: any, res: any, body: UsersDTO): Promise<void>;
     register(req: any, res: any, body: UsersDTO): Promise<void>;
 }

@@ -27,10 +27,20 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(email: string): Promise<User> {
-    return this.usersRepository.findOne({
-      email:email,
+  async findOne(email: string): Promise<Record<string, any>> {
+    let isOK = true;
+    const res = await this.usersRepository.findOne({ email: email }).catch((error) => {
+      console.log(error)
+      isOK = false;
     });
+    console.log(res)
+    if (isOK) {
+      return { status: 201, content: { msg: res } };
+    }
+    else {
+      return { status: 400, content: { msg: 'User not found' } };
+    }
+
   }
 
   async remove(id: string): Promise<void> {
