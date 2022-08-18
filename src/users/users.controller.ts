@@ -3,9 +3,10 @@ import { ApiOperation, ApiTags, ApiBearerAuth, ApiResponse, ApiBody, ApiProperty
 import { UsersService } from './users.service';
 import { UsersDTO } from './dto/create-user.dto'
 import { User } from './entities/user.entity'
-
+import { IsEmail } from 'class-validator';
 
 class Email{
+    @IsEmail()
     @ApiProperty({example:"jhlee11@cookapps.com"})
     email:string
 }
@@ -27,8 +28,6 @@ export class UsersController {
     @ApiOperation({summary: "회원찾기"})
     @ApiResponse({status:403, description: 'forbidden'})
     async findUser(@Req() req, @Res() res, @Body() body:Email){
-        console.log(body)
-        
         const result = await this.usersService.findOne(body.email);
         res.status(result.status).json(result.content);
     }
@@ -41,7 +40,4 @@ export class UsersController {
         const reg = await this.usersService.register(body)
         res.status(reg.status).json(reg.content)   ;
     }
-
-    
-
 }

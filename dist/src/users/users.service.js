@@ -40,8 +40,7 @@ let UsersService = class UsersService {
             console.log(error);
             isOK = false;
         });
-        console.log(res);
-        if (isOK) {
+        if (isOK && res) {
             return { status: 201, content: { msg: res } };
         }
         else {

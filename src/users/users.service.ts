@@ -29,12 +29,12 @@ export class UsersService {
 
   async findOne(email: string): Promise<Record<string, any>> {
     let isOK = true;
+
     const res = await this.usersRepository.findOne({ email: email }).catch((error) => {
       console.log(error)
       isOK = false;
     });
-    console.log(res)
-    if (isOK) {
+    if (isOK && res) {
       return { status: 201, content: { msg: res } };
     }
     else {

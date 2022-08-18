@@ -10,14 +10,16 @@ async function bootstrap() {
   //console.log(process.argv[1]) // dist/src/main
   //console.log(process.argv[2]+" "+typeof(process.argv[2])) // argument[0]
   
-  
+
   //Swagger Initialize
   const config = new DocumentBuilder()
     .setTitle('Nestjs Boilerplate App')
     .setDescription('The N.B.As API Description')
     .setVersion('1.0')
     .addTag('Users')
-    .addServer('http://localhost:3000')
+    .addServer('http://localhost:3000',"로컬 호스트 서버")
+    .addServer('http://1.2.3.4:3000',"Dev 서버")
+    .addServer('https://tech.blablabla.blabla/apis',"Dev 서버")
     .build();
   const document = SwaggerModule.createDocument(app, config);
 
