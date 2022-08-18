@@ -4522,7 +4522,7 @@
   "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   "version" "1.0.0"
 
-"swagger-ui-dist@4.13.2":
+"swagger-ui-dist@^4.13.2", "swagger-ui-dist@4.13.2":
   "integrity" "sha512-jHL6UyIYpvEI7NsuWd0R3hJaPQTg6Oo4qSBo+oVfOEkv6rrQm/475RGSMmZgV6ajp+Sgrp9CqrDjQYAgQqiv1A=="
   "resolved" "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-4.13.2.tgz"
   "version" "4.13.2"
