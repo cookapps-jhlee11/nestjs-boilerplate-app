@@ -57,4 +57,4 @@ jobs:
       - name: Swagger Docs Build
         run: |
           npm run build:swagger
-          aws s3 cp ./swagger-docs/swagger-spec.json s3://tech-swagger-test/swagger/swagger-spec.json
+          aws s3 cp ./swagger_docs/swagger-spec.json s3://tech-swagger-test/swagger/swagger-spec.json
