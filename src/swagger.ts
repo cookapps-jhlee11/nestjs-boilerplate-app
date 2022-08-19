@@ -17,7 +17,7 @@ async function bootstrap() {
     .setDescription('The N.B.As API Description')
     .setVersion('1.0')
     .addTag('Users')
-    .addServer('http://localhost:3000',"로컬 호스트 서버")
+    .addServer('http://localhost:3001',"로컬 호스트 서버")
     .addServer('http://1.2.3.4:3000',"Dev 서버")
     .addServer('https://tech.blablabla.blabla/apis',"prod 서버")
     .build();
@@ -32,6 +32,6 @@ async function bootstrap() {
   }
   SwaggerModule.setup('api', app,document);
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();
