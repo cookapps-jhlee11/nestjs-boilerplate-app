@@ -5297,9 +5297,9 @@
   "version" "3.1.2"
 
 "keyv@^4.0.0":
-  "integrity" "sha512-AcysI17RvakTh8ir03+a3zJr5r0ovnAH/XTXei/4HIv3bL2K/jzvgivLK9UuI/JbU1aJjM3NSAnVvVVd3n+4DQ=="
-  "resolved" "https://registry.npmjs.org/keyv/-/keyv-4.3.3.tgz"
-  "version" "4.3.3"
+  "integrity" "sha512-PzByhNxfBLnSBW2MZi1DF+W5+qB/7BMpOokewqIvqS8GFtP7xHm2oeGU72Y1fhtfOv/FiEnI4+nyViYDmUChnw=="
+  "resolved" "https://registry.npmjs.org/keyv/-/keyv-4.4.1.tgz"
+  "version" "4.4.1"
   dependencies:
     "compress-brotli" "^1.3.8"
     "json-buffer" "3.0.1"
@@ -6992,9 +6992,9 @@
     "send" "0.18.0"
 
 "serverless-offline@^9.2.5":
-  "integrity" "sha512-e2Htx/iB8iqgRlKU8qDwQWNevb4wZ04+YGIcIOPnYBhrtr1Tw+qx2Sl2JXaCGK4pPmkQf5KKhUXY03V2aU7EGw=="
-  "resolved" "https://registry.npmjs.org/serverless-offline/-/serverless-offline-9.2.5.tgz"
-  "version" "9.2.5"
+  "integrity" "sha512-Z97Fk6txUp5hJos2VOSiPNx8k9RKcQL0PzV5WloCEPA6AvCpZpB1M1VKn67pwltHQVJ+DEdNS5pXIWCxReVctw=="
+  "resolved" "https://registry.npmjs.org/serverless-offline/-/serverless-offline-9.2.6.tgz"
+  "version" "9.2.6"
   dependencies:
     "@hapi/boom" "^10.0.0"
     "@hapi/h2o2" "^9.1.0"
@@ -7145,9 +7145,9 @@
   "version" "3.0.7"
 
 "simple-git@^3.7.0":
-  "integrity" "sha512-cy1RSRFHGZSrlYa3MnUuNVOXLUdifEZD2X8+AZjg8mKCdRvtCFSga6acq5N2g0ggb8lH3jBi369MrFZ+Y6sfsA=="
-  "resolved" "https://registry.npmjs.org/simple-git/-/simple-git-3.12.0.tgz"
-  "version" "3.12.0"
+  "integrity" "sha512-VYrs3joeHvWGcN3K135RpGpPjm4AHYeOrclwew6LlfHgq6ozQYIW2yMnmjf4PCgVOuSYCbXkdUjyiFawuJz8MA=="
+  "resolved" "https://registry.npmjs.org/simple-git/-/simple-git-3.13.0.tgz"
+  "version" "3.13.0"
   dependencies:
     "@kwsites/file-exists" "^1.1.1"
     "@kwsites/promise-deferred" "^1.1.1"
