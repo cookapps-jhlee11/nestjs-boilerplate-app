@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "build:swagger": "nest build && node dist/src/main swaggerBuild",
+    "build:swagger": "nest build && node dist/src/swagger swaggerBuild",
     "start:swagger": "ts-node ./src/swagger.ts",
     "start": "nest start",
     "start:dev": "nest start --watch",
