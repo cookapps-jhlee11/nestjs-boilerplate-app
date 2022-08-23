@@ -18,9 +18,9 @@ export class User {
   @Column({nullable:true})
   address: string;
 
-  @ApiProperty({example: 'male', description:'The gender of the user'})
-  @Column({nullable:true})
-  gender: string;
+  // @ApiProperty({example: 'male', description:'The gender of the user'})
+  // @Column({nullable:true})
+  // gender: string;
 
   @ApiProperty({example:'jhlee11@cookapps.com', description:'E-mail'})
   @Column()
