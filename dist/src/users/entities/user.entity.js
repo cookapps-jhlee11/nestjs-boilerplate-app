@@ -31,11 +31,6 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "address", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'male', description: 'The gender of the user' }),
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "gender", void 0);
-__decorate([
     (0, swagger_1.ApiProperty)({ example: 'jhlee11@cookapps.com', description: 'E-mail' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
