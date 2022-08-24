@@ -1,19 +1,40 @@
-service: serverless-example
+service: nestjs-boilerplate-app
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-offline
+  - serverless-plugin-optimize
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true
+    useChildProcesses: false
+    printOutput: true
+    corsAllowOrigin: '*'
+
+  dev:
+    region: ap-northeast-2
+    functions:
+      events:
+        - httpApi: '*'
+    awsProfile: jhlee11
+
 
 provider:
   name: aws
   runtime: nodejs16.x
+  stage: ${opt:stage, 'dev'}
+  profile: ${self:custom.${self:provider.stage}.awsProfile, 'default'}
+  region: ${self:custom.${self:provider.stage}.region, 'ap-northeast-2'}
+  tags:
+    created: tech-jhlee11
+  memorySize: 128
+  timeout: 10
 
 functions:
-  main:
+  api:
+    name: ${self:service}-${self:provider.stage}
     handler: dist/src/main.handler
     events:
-      - http:
-          method: ANY
-          path: /
-      - http:
-          method: ANY
-          path: '{proxy+}'
+      - httpApi: '*'
+
