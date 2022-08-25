@@ -3,12 +3,10 @@ service: nestjs-boilerplate-app
 plugins:
   - serverless-dotenv-plugin
   - serverless-offline
-  - serverless-plugin-optimize
 
 custom:
   serverless-offline:
     noPrependStageInUrl: true
-    useChildProcesses: false
     printOutput: true
     corsAllowOrigin: '*'
 
@@ -25,7 +23,7 @@ provider:
   runtime: nodejs16.x
   stage: ${opt:stage, 'dev'}
   profile: ${self:custom.${self:provider.stage}.awsProfile, 'default'}
-  region: ${self:custom.${self:provider.stage}.region, 'ap-northeast-2'}
+  region: ${self:custom.${self:provider.stage}.region}
   tags:
     created: tech-jhlee11
   memorySize: 128
@@ -34,7 +32,6 @@ provider:
 functions:
   api:
     name: ${self:service}-${self:provider.stage}
-    handler: dist/src/main.handler
+    handler: dist/src/lambda.handler
     events:
       - httpApi: '*'
-

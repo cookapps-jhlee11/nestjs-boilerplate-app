@@ -1,57 +1,35 @@
-// import { NestFactory } from '@nestjs/core';
-// import serverlessExpress from '@vendia/serverless-express'
-// import { Callback, Context, Handler } from 'aws-lambda'
-// import { AppModule } from './app.module';
-
-// let server: Handler;
-
-// async function bootstrap(): Promise<Handler> {
-//   const app = await NestFactory.create(AppModule);
-//   app.enableCors();
-//   await app.init();
-
-//   const expressApp = app.getHttpAdapter().getInstance();
-//   return serverlessExpress({ app: expressApp });
-// }
-
-// export const handler: Handler = async (event: any, context: Context, callback: Callback,) => {
-//   server = server ?? (await bootstrap());
-//   return server(event, context, callback);
-// };
-
-
-
-import { Handler, Context } from 'aws-lambda';
-import { Server } from 'http';
-import { createServer, proxy } from 'aws-serverless-express';
-import { eventContext } from 'aws-serverless-express/middleware';
-
 import { NestFactory } from '@nestjs/core';
-import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
-const express = require('express');
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
-// NOTE: If you get ERR_CONTENT_DECODING_FAILED in your browser, this is likely
-// due to a compressed response (e.g. gzip) which has not been handled correctly
-// by aws-serverless-express and/or API Gateway. Add the necessary MIME types to
-// binaryMimeTypes below
-const binaryMimeTypes: string[] = [];
+  //console.log(process.argv[0]) // $node
+  //console.log(process.argv[1]) // dist/src/main
+  //console.log(process.argv[2]+" "+typeof(process.argv[2])) // argument[0]
+  
 
-let cachedServer: Server;
+  //Swagger Initialize
+  const config = new DocumentBuilder()
+    .setTitle('Nestjs Boilerplate App')
+    .setDescription('The N.B.As API Description')
+    .setVersion('1.0')
+    .addTag('Users')
+    .addServer('http://localhost:3001',"로컬 호스트 서버")
+    .addServer('https://ig3q1yuwil.execute-api.ap-northeast-2.amazonaws.com',"람다 서버")
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
 
-async function bootstrapServer(): Promise<Server> {
- if (!cachedServer) {
-    const expressApp = express();
-    const nestApp = await NestFactory.create(AppModule, new ExpressAdapter(expressApp))
-    nestApp.use(eventContext());
-    await nestApp.init();
-    cachedServer = createServer(expressApp, undefined, binaryMimeTypes);
- }
- return cachedServer;
+  if(process.argv[2] === 'swaggerBuild'){
+    const fs = require('fs')
+    fs.writeFileSync("./swagger_docs/swagger-spec.json",JSON.stringify(document));
+    console.log('Swagger document has successfully saved');
+    app.close();
+    return;
+  }
+  SwaggerModule.setup('api', app,document);
+  await app.listen(process.env.PORT || 3001);
 }
-
-export const handler: Handler = async (event: any, context: Context) => {
- cachedServer = await bootstrapServer();
- return proxy(cachedServer, event, context, 'PROMISE').promise;
-}
+bootstrap();

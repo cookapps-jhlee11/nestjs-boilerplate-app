@@ -9,8 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "build:swagger": "nest build && node dist/src/swagger swaggerBuild",
-    "start:swagger": "ts-node ./src/swagger.ts",
+    "build:swagger": "nest build && node dist/src/main swaggerBuild",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -26,6 +25,7 @@
     "revert:migration": "npm run build && npm run typeorm migration:revert",
     "create:migration": "npm run build && npm run typeorm migration:create -- -n",
     "generate:migration": "npm run build && npm run typeorm migration:generate -- -n",
+    "sls:offline":"npm run build && sls offline",
     "sls:deploy:dev": "npm run build && sls deploy --stage dev",
     "sls:deploy:prod": "npm run build && sls deploy --stage prod"
   },

@@ -1,27 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = void 0;
-const aws_serverless_express_1 = require("aws-serverless-express");
-const middleware_1 = require("aws-serverless-express/middleware");
 const core_1 = require("@nestjs/core");
-const platform_express_1 = require("@nestjs/platform-express");
 const app_module_1 = require("./app.module");
-const express = require('express');
-const binaryMimeTypes = [];
-let cachedServer;
-async function bootstrapServer() {
-    if (!cachedServer) {
-        const expressApp = express();
-        const nestApp = await core_1.NestFactory.create(app_module_1.AppModule, new platform_express_1.ExpressAdapter(expressApp));
-        nestApp.use((0, middleware_1.eventContext)());
-        await nestApp.init();
-        cachedServer = (0, aws_serverless_express_1.createServer)(expressApp, undefined, binaryMimeTypes);
+const swagger_1 = require("@nestjs/swagger");
+async function bootstrap() {
+    const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.enableCors();
+    const config = new swagger_1.DocumentBuilder()
+        .setTitle('Nestjs Boilerplate App')
+        .setDescription('The N.B.As API Description')
+        .setVersion('1.0')
+        .addTag('Users')
+        .addServer('http://localhost:3001', "로컬 호스트 서버")
+        .addServer('https://ig3q1yuwil.execute-api.ap-northeast-2.amazonaws.com', "람다 서버")
+        .build();
+    const document = swagger_1.SwaggerModule.createDocument(app, config);
+    if (process.argv[2] === 'swaggerBuild') {
+        const fs = require('fs');
+        fs.writeFileSync("./swagger_docs/swagger-spec.json", JSON.stringify(document));
+        console.log('Swagger document has successfully saved');
+        app.close();
+        return;
     }
-    return cachedServer;
+    swagger_1.SwaggerModule.setup('api', app, document);
+    await app.listen(process.env.PORT || 3001);
 }
-const handler = async (event, context) => {
-    cachedServer = await bootstrapServer();
-    return (0, aws_serverless_express_1.proxy)(cachedServer, event, context, 'PROMISE').promise;
-};
-exports.handler = handler;
+bootstrap();
 //# sourceMappingURL=main.js.map
