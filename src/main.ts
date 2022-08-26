@@ -6,11 +6,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
 
-  //console.log(process.argv[0]) // $node
-  //console.log(process.argv[1]) // dist/src/main
-  //console.log(process.argv[2]+" "+typeof(process.argv[2])) // argument[0]
-  
-
   //Swagger Initialize
   const config = new DocumentBuilder()
     .setTitle('Nestjs Boilerplate App')

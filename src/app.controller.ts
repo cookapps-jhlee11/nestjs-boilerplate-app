@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res} from '@nestjs/common';
+import { Body, ConsoleLogger, Controller, Get, Post, Req, Res} from '@nestjs/common';
 import { UsersService } from './users/users.service';
 import { AppService } from './app.service';
 
@@ -11,6 +11,5 @@ export class AppController {
     const result = this.appService.getHello();
     res.status(200).json(result);
   }
-
 }
 
