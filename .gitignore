@@ -1,6 +1,9 @@
 # dependencies
 node_modules/
 .env*
+.build/
+.serverless/
+dist/
 # IDE
 /.idea
 /.awcache
